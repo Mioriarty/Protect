@@ -9,14 +9,17 @@ public class ObScript : MonoBehaviour {
 	public Destroyable destroyable;
 	private GroundScript groundScript;
 
-
+	protected float xStart;
 
 
 	// Use this for initialization
 	void Start () {
 		groundScript = GameObject.Find ("Ground").GetComponent<GroundScript> ();
-
+		xStart = transform.position.x;
+		init ();
 	}
+
+	protected virtual void init(){}
 	
 	// Update is called once per frame
 	void Update () {
