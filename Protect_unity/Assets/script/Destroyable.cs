@@ -26,6 +26,11 @@ abstract public class Destroyable : MonoBehaviour {
 
 	void Update(){
 		setPsPos ();
+
+		if (transform.position.y < -Camera.main.orthographicSize - 2.0f) {
+			realTrailPS.GetComponent<ParticleSystem> ().Stop ();
+			Destroy (gameObject);
+		}
 	}
 
 	protected void destroy(bool givePoints) {
@@ -34,11 +39,10 @@ abstract public class Destroyable : MonoBehaviour {
 		ps.startColor = particleColor;
 		ps.Play ();
 
-		if(givePoints)
+		if(player != null && givePoints)
 			player.addPoints (worthyness);
 
 		realTrailPS.GetComponent<ParticleSystem> ().Stop ();
-		destrs.Remove (this);
 		
 		Destroy (gameObject);
 	}
@@ -52,9 +56,15 @@ abstract public class Destroyable : MonoBehaviour {
 		hit (1);
 	}
 
+	void OnDestroy(){
+		destrs.Remove (this);
+	}
+
+
 	public static void destroyAll(){
 		for (int i = destrs.Count - 1; i >= 0; i--)
-			destrs [i].destroy (false);
+			if(destrs[i].enabled)
+				destrs [i].destroy (false);
 		
 		destrs.Clear ();
 	}

@@ -7,14 +7,12 @@ public class ObScript : MonoBehaviour {
 	public Vector3 movement;
 	public uint groundHitDamage = 1;
 	public Destroyable destroyable;
-	private GroundScript groundScript;
 
 	protected float xStart;
 
 
 	// Use this for initialization
 	void Start () {
-		groundScript = GameObject.Find ("Ground").GetComponent<GroundScript> ();
 		xStart = transform.position.x;
 		init ();
 	}
@@ -32,7 +30,7 @@ public class ObScript : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D c){
 		if (c.gameObject.tag == "Ground") {
-			groundScript.hit ((int)groundHitDamage, gameObject.GetComponent<SpriteRenderer> ().color);
+			GameObject.Find ("Ground").GetComponent<GroundScript> ().hit ((int)groundHitDamage, gameObject.GetComponent<SpriteRenderer> ().color);
 			destroyable.hit (-1);
 		}
 	}

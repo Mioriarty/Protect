@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   psPrefab: {fileID: 1364829853137198, guid: b8555c00a7099430eaf668cecc2daf9b, type: 2}
-  particleColor: {r: 1, g: 0.51724136, b: 0, a: 0.772}
+  particleColor: {r: 1, g: 0.51724136, b: 0, a: 1}
   worthyness: 1
   trailPS: {fileID: 1442619620084614, guid: 7d02d2fc274784fd39c823e3e8b48b25, type: 2}
 --- !u!114 &114679263233661284

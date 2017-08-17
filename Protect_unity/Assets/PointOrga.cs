@@ -12,7 +12,7 @@ public class PointOrga : MonoBehaviour {
 	public Text scoreOut;
 	public Text highscoreOut;
 
-	private bool newHighscore = true;
+	private bool newHighscore = false;
 
 	public float timeOffset = 1;
 	private float timeOffsetPast = 0;
@@ -37,13 +37,14 @@ public class PointOrga : MonoBehaviour {
 		} else {
 			highscoreOut.text = "Highscore\n" + highscore.ToString ();
 		}
+		PlayerPrefs.Save ();
 	}
 
 	void Update() {
 		timeOffsetPast += Time.deltaTime;
 		if(timeOffsetPast >= timeOffset){
 			if(Input.GetMouseButtonDown(0))
-				SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+				SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
 
 			if (newHighscore && psPlayCount < highscorePSs.Count) {
 				psTimePast += Time.deltaTime;
