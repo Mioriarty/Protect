@@ -935,7 +935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f3b145924b04bfc8d2e8f92d53c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 10
+  startHealth: 3
   fullHealthColor: {r: 1, g: 1, b: 1, a: 1}
   noHealthColor: {r: 0.9632353, g: 0.48454845, b: 0.26913932, a: 1}
   colorTransTime: 0.5

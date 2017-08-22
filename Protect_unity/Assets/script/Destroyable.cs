@@ -36,7 +36,7 @@ abstract public class Destroyable : MonoBehaviour {
 	protected void destroy(bool givePoints) {
 		ParticleSystem ps = Instantiate (psPrefab, transform.position, Quaternion.Euler (270, 0, 0)).GetComponent<ParticleSystem> ();
 		ParticleSystem.MainModule newMain = ps.main;
-		ps.startColor = particleColor;
+		newMain.startColor = new ParticleSystem.MinMaxGradient(particleColor );
 		ps.Play ();
 
 		if(player != null && givePoints)

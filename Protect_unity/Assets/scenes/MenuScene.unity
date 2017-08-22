@@ -334,7 +334,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Achievements
+  m_Text: Settings
 --- !u!222 &141322703
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -503,7 +503,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 382409608}
-        m_MethodName: callAchievements
+        m_MethodName: callSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

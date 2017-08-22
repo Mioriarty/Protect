@@ -16,7 +16,6 @@ public class MangeManu : MonoBehaviour {
 
 	private const short PLAY = 1;
 	private const short UPGRADES = 2;
-	private const short ACHIEVEMENTS = 3;
 
 	// Use this for initialization
 	void Start () {
@@ -39,9 +38,7 @@ public class MangeManu : MonoBehaviour {
 				case UPGRADES:
 					Debug.Log ("Upgrades");
 					break;
-				case ACHIEVEMENTS:
-					Debug.Log ("Achievements");
-					break;
+				
 				}
 				callState = 0;
 				callTimePast = 0.0f;
@@ -68,13 +65,12 @@ public class MangeManu : MonoBehaviour {
 	}
 
 	public void callUpgrades(){
-		prepareCall ();
+		//prepareCall ();
 		callState = UPGRADES;
 	}
 
-	public void callAchievements(){
-		prepareCall ();
-		callState = ACHIEVEMENTS;
+	public void callSettings(){
+		SceneManager.LoadScene ("SettingsScene", LoadSceneMode.Single);
 	}
 
 	void prepareCall(){

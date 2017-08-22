@@ -104,7 +104,7 @@ public class GroundScript : MonoBehaviour {
 
 	void die(){
 		ParticleSystem.MainModule newMain = exterminatePS.main;
-		exterminatePS.startColor = sp.color;
+		newMain.startColor = new ParticleSystem.MinMaxGradient(sp.color);
 		exterminatePS.Play ();
 		Destroyable.destroyAll ();
 		Item.doVanishingAll ();
