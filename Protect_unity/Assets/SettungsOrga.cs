@@ -5,9 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class SettungsOrga : MonoBehaviour {
 
+	public GameObject soundOnButton;
+	public GameObject soundOffButton;
+
 	// Use this for initialization
 	void Start () {
-		
+		bool soundOn = PlayerPrefs.GetInt ("soundOn", 1) == 1;
+		soundOffButton.GetComponent<CanvasRenderer> ().SetAlpha (soundOn ? 0.3f : 1.0f);
+		soundOnButton.GetComponent<CanvasRenderer> ().SetAlpha (soundOn ? 1.0f : 0.3f);
 	}
 	
 	// Update is called once per frame
@@ -19,4 +24,25 @@ public class SettungsOrga : MonoBehaviour {
 		SceneManager.LoadScene ("MenuScene", LoadSceneMode.Single);
 	
 	}
+		
+
+	public void callSound(bool active){
+		if (active) {
+			soundOffButton.GetComponent<CanvasRenderer> ().SetAlpha (0.3f);
+			soundOnButton.GetComponent<CanvasRenderer> ().SetAlpha (1.0f);
+			PlayerPrefs.SetInt ("soundOn", 1);
+		} else {
+			soundOnButton.GetComponent<CanvasRenderer> ().SetAlpha (0.3f);
+			soundOffButton.GetComponent<CanvasRenderer> ().SetAlpha (1.0f);
+			PlayerPrefs.SetInt ("soundOn", 0);
+		}
+
+	}
+
+	public void callReset(){
+		
+		PlayerPrefs.DeleteAll ();
+		callSound (true);
+	}
+
 }

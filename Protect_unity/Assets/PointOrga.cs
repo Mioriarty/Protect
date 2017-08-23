@@ -32,7 +32,7 @@ public class PointOrga : MonoBehaviour {
 			highscoreOut.text = "New Highscore!";
 			PlayerPrefs.SetInt ("highscore", score);
 			newHighscore = true;
-		} else if (score == highscore) {
+		} else if (score == highscore && score > 0) {
 			highscoreOut.text = "Soo Close!";
 		} else {
 			highscoreOut.text = "Highscore\n" + highscore.ToString ();

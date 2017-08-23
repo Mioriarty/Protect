@@ -18,6 +18,8 @@ abstract public class Destroyable : MonoBehaviour {
 
 	private GameObject realTrailPS;
 
+	private bool clicked = false;
+
 	void Start(){
 		player = GameObject.FindWithTag ("Orga").GetComponent<PlayerScript> ();
 		realTrailPS = Instantiate (trailPS);
@@ -26,7 +28,7 @@ abstract public class Destroyable : MonoBehaviour {
 
 	void Update(){
 		setPsPos ();
-
+		clicked = false;
 		if (transform.position.y < -Camera.main.orthographicSize - 2.0f) {
 			realTrailPS.GetComponent<ParticleSystem> ().Stop ();
 			Destroy (gameObject);
@@ -53,7 +55,12 @@ abstract public class Destroyable : MonoBehaviour {
 		
 
 	void OnMouseDown(){
-		hit (1);
+		if (!clicked) {
+			clicked = true;
+			hit (1);
+		}
+
+
 	}
 
 	void OnDestroy(){
@@ -68,4 +75,9 @@ abstract public class Destroyable : MonoBehaviour {
 		
 		destrs.Clear ();
 	}
+
+	public void click(){
+		OnMouseDown ();
+	}
+
 }

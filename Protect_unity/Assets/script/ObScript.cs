@@ -31,6 +31,8 @@ public class ObScript : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D c){
 		if (c == null || !c.gameObject.activeSelf)
 			return;
+		if(!c.gameObject.activeSelf)
+			return;	
 		if (c.gameObject.tag == "Ground") {
 			GameObject.Find ("Ground").GetComponent<GroundScript> ().hit ((int)groundHitDamage, gameObject.GetComponent<SpriteRenderer> ().color);
 			destroyable.hit (-1);

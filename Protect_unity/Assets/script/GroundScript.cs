@@ -9,7 +9,7 @@ public class GroundScript : MonoBehaviour {
 	public int startHealth = 10;
 	private int health;
 
-	public Color fullHealthColor;
+	private Color fullHealthColor;
 	public Color noHealthColor;
 
 	private SpriteRenderer sp;
@@ -38,6 +38,7 @@ public class GroundScript : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		player = GameObject.FindWithTag ("Orga").GetComponent<PlayerScript> ();
 		health = startHealth;
+		fullHealthColor = new Color (PlayerPrefs.GetFloat ("groundColR", 1f), PlayerPrefs.GetFloat ("groundColG", 1f), PlayerPrefs.GetFloat ("groundColB", 1f), 1.0f);
 		sp.color = fullHealthColor;
 		rawColor = new Color(0f, 0f, 0f);
 
@@ -105,6 +106,9 @@ public class GroundScript : MonoBehaviour {
 	void die(){
 		ParticleSystem.MainModule newMain = exterminatePS.main;
 		newMain.startColor = new ParticleSystem.MinMaxGradient(sp.color);
+		PlayerPrefs.SetFloat ("groundColR", sp.color.r);
+		PlayerPrefs.SetFloat ("groundColG", sp.color.g);
+		PlayerPrefs.SetFloat ("groundColB", sp.color.b);
 		exterminatePS.Play ();
 		Destroyable.destroyAll ();
 		Item.doVanishingAll ();
