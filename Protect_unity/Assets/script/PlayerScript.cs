@@ -13,6 +13,11 @@ public class PlayerScript : MonoBehaviour {
 	private bool isSceneTrans = false;
 	private float sceneTransTimePast = 0.0f;
 
+	void Start(){
+		SoundControl.updateSound ();
+	}
+
+
 	void Update(){
 		
 		if (isSceneTrans) {

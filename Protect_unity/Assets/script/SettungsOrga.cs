@@ -40,7 +40,7 @@ public class SettungsOrga : MonoBehaviour {
 			soundOffButton.GetComponent<CanvasRenderer> ().SetAlpha (1.0f);
 			PlayerPrefs.SetInt ("soundOn", 0);
 		}
-		Camera.main.GetComponent<CameraSoundControl> ().updateSound ();
+		SoundControl.updateSound ();
 
 	}
 

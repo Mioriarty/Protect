@@ -32,7 +32,7 @@ public class MangeManu : MonoBehaviour {
 		foreach(GameObject o in buttons){
 			buttonTextsColors.Add(o.transform.GetChild (0).gameObject.GetComponent<Text> ().color);
 		}
-		Camera.main.GetComponent<CameraSoundControl> ().updateSound ();
+		SoundControl.updateSound ();
 	}
 	
 	// Update is called once per frame

@@ -2,18 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraSoundControl : MonoBehaviour {
+public class SoundControl {
 
-	private AudioListener listener;
 
-	// Use this for initialization
-	void Start () {
-		listener = GetComponent<AudioListener> ();
-		updateSound ();
-	}
+	public static void updateSound(){
+		AudioListener.pause = PlayerPrefs.GetInt ("soundOn", 1) == 0;
 
-	public void updateSound(){
-		listener.enabled = PlayerPrefs.GetInt ("soundOn", 1) == 1;
 	}
 
 }
