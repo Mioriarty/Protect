@@ -23,7 +23,15 @@ abstract public class Destroyable : MonoBehaviour {
 	void Start(){
 		player = GameObject.FindWithTag ("Orga").GetComponent<PlayerScript> ();
 		realTrailPS = Instantiate (trailPS);
-		destrs.Add (this);
+		
+	}
+	
+	void OnEnable(){
+		destrs.Add (this);	
+	}
+	
+	void OnDisable(){
+		destrs.Remove (this);	
 	}
 
 	void Update(){
@@ -61,10 +69,6 @@ abstract public class Destroyable : MonoBehaviour {
 		}
 
 
-	}
-
-	void OnDestroy(){
-		destrs.Remove (this);
 	}
 
 
