@@ -20,7 +20,7 @@ public class GeneratorScript : MonoBehaviour {
 	public float genSaveDistance = 0.5f;
 
 	public float itemReloadTime = 1f;
-	public float itemChance = 0.1f;
+	public float itemChance = 1f;
 	private float itemReloadTimePast = 0f;
 
 	private float startTime;
@@ -115,7 +115,8 @@ public class GeneratorScript : MonoBehaviour {
 		float height = size.y * prefab.transform.localScale.y;
 		float width = size.x * prefab.transform.localScale.x;
 		float range = genRange - width - genSaveDistance;
-		Instantiate(prefab, new Vector3(Mathf.Lerp(0, range*2, (x+1)/2f)-range, genHeight + height + genSaveDistance, prefab.transform.position.z), Quaternion.identity);
+		float z = size.x + size.y;
+		Instantiate(prefab, new Vector3(Mathf.Lerp(0, range*2, (x+1)/2f)-range, genHeight + height + genSaveDistance, z), Quaternion.identity);
 	}
 
 	public void stopGenerating(){
