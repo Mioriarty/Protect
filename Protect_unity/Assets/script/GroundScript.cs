@@ -9,7 +9,7 @@ public class GroundScript : MonoBehaviour {
 	public int startHealth = 10;
 	private int health;
 
-	private Color fullHealthColor;
+	public Color fullHealthColor;
 	public Color noHealthColor;
 
 	private SpriteRenderer sp;
@@ -38,7 +38,10 @@ public class GroundScript : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		player = GameObject.FindWithTag ("Orga").GetComponent<PlayerScript> ();
 		health = startHealth;
-		fullHealthColor = new Color (PlayerPrefs.GetFloat ("groundColR", 1f), PlayerPrefs.GetFloat ("groundColG", 1f), PlayerPrefs.GetFloat ("groundColB", 1f), 1.0f);
+		if (PlayerPrefs.HasKey ("groundColR")) {
+			Color savedColor = new Color (PlayerPrefs.GetFloat ("groundColR", 1f), PlayerPrefs.GetFloat ("groundColG", 1f), PlayerPrefs.GetFloat ("groundColB", 1f), 1.0f);
+			fullHealthColor = Color.Lerp (savedColor, fullHealthColor, 0.25f);
+		}
 		sp.color = fullHealthColor;
 		rawColor = new Color(0f, 0f, 0f);
 

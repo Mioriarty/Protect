@@ -66,7 +66,7 @@ public class MangeManu : MonoBehaviour {
 
 	public void callUpgrades(){
 		//prepareCall ();
-		callState = UPGRADES;
+		//callState = UPGRADES;
 	}
 
 	public void callSettings(){
