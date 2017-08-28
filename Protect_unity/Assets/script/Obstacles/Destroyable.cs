@@ -63,11 +63,8 @@ abstract public class Destroyable : MonoBehaviour {
 		
 
 	void OnMouseDown(){
-		if (!clicked) {
-			clicked = true;
-			hit (1);
-		}
-
+		if (SystemInfo.deviceType == DeviceType.Desktop)
+			click ();
 
 	}
 
@@ -81,7 +78,10 @@ abstract public class Destroyable : MonoBehaviour {
 	}
 
 	public void click(){
-		OnMouseDown ();
+		if (!clicked) {
+			clicked = true;
+			hit (1);
+		}
 	}
 
 }

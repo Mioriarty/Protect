@@ -20,8 +20,12 @@ public class SettungsOrga : MonoBehaviour {
 		
 	}
 
+	void OnEnable(){
+		Start ();
+	}
+
 	public void callBack(){
-		SceneManager.LoadScene ("MenuScene", LoadSceneMode.Single);
+		MangeManu.instance.startMainMenu ();
 	
 	}
 		
@@ -36,6 +40,7 @@ public class SettungsOrga : MonoBehaviour {
 			soundOffButton.GetComponent<CanvasRenderer> ().SetAlpha (1.0f);
 			PlayerPrefs.SetInt ("soundOn", 0);
 		}
+		Camera.main.GetComponent<CameraSoundControl> ().updateSound ();
 
 	}
 

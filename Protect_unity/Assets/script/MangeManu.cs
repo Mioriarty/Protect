@@ -6,9 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class MangeManu : MonoBehaviour {
 
+	public static MangeManu instance;
+	void Awake(){
+		instance = this;
+	}
+
 	public Text scoreboard;
 	public List<GameObject> buttons;
 	private List<Color> buttonTextsColors;
+
+	public GameObject mainMenuRoot;
+	public GameObject settingsRoot;
 
 	private short callState = 0;
 	public float callWaitTime = 1.5f;
@@ -24,6 +32,7 @@ public class MangeManu : MonoBehaviour {
 		foreach(GameObject o in buttons){
 			buttonTextsColors.Add(o.transform.GetChild (0).gameObject.GetComponent<Text> ().color);
 		}
+		Camera.main.GetComponent<CameraSoundControl> ().updateSound ();
 	}
 	
 	// Update is called once per frame
@@ -70,7 +79,8 @@ public class MangeManu : MonoBehaviour {
 	}
 
 	public void callSettings(){
-		SceneManager.LoadScene ("SettingsScene", LoadSceneMode.Single);
+		mainMenuRoot.SetActive(false);
+		settingsRoot.SetActive (true);
 	}
 
 	void prepareCall(){
@@ -79,5 +89,10 @@ public class MangeManu : MonoBehaviour {
 		}
 		Destroyable.destroyAll ();
 		gameObject.GetComponent<SimpleGeneratorScript> ().stopGenerating ();
+	}
+
+	public void startMainMenu(){
+		settingsRoot.SetActive (false);
+		mainMenuRoot.SetActive (true);
 	}
 }

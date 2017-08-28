@@ -115,7 +115,7 @@ public class GeneratorScript : MonoBehaviour {
 		float height = size.y * prefab.transform.localScale.y;
 		float width = size.x * prefab.transform.localScale.x;
 		float range = genRange - width - genSaveDistance;
-		float z = size.x + size.y;
+		float z = prefab.transform.localScale.x + prefab.transform.localScale.y;
 		Instantiate(prefab, new Vector3(Mathf.Lerp(0, range*2, (x+1)/2f)-range, genHeight + height + genSaveDistance, z), Quaternion.identity);
 	}
 
