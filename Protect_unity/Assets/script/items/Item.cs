@@ -19,9 +19,16 @@ public abstract class Item : MonoBehaviour {
 	void Start () {
 		root = transform.parent.gameObject;
 		animator = GetComponent<Animator> ();
-		items.Add (this);
 
 		init ();
+	}
+	
+	void OnEnable(){
+		items.Add(this);	
+	}
+	
+	void OnDisable(){
+		items.Remove(this);
 	}
 
 	protected abstract void init (); 
