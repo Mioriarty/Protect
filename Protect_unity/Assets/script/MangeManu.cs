@@ -27,7 +27,7 @@ public class MangeManu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		scoreboard.text = PlayerPrefs.GetInt ("highscore", 0).ToString();
+		updateHighscoreScreen();
 		buttonTextsColors = new List<Color> ();
 		foreach(GameObject o in buttons){
 			buttonTextsColors.Add(o.transform.GetChild (0).gameObject.GetComponent<Text> ().color);
@@ -66,6 +66,10 @@ public class MangeManu : MonoBehaviour {
 		}
 
 	}
+	
+	private void updateHighscoreScreen(){
+		scoreboard.text = PlayerPrefs.GetInt ("highscore", 0).ToString();
+	}
 
 	public void callPlay(){
 		prepareCall ();
@@ -94,5 +98,6 @@ public class MangeManu : MonoBehaviour {
 	public void startMainMenu(){
 		settingsRoot.SetActive (false);
 		mainMenuRoot.SetActive (true);
+		updateHighscoreScreen();
 	}
 }
