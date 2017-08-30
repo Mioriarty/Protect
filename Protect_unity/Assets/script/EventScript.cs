@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class EventScript : MonoBehaviour {
 
-	private GameObject text;
+	//private GameObject text;
 	private GameObject ps;
 	private Vector2 screenSize;
 	private Vector2 canvasSize;
 
 	void Start () {
-		text = transform.GetChild (0).gameObject;
+		//text = transform.GetChild (0).gameObject;
 		ps = transform.GetChild (1).gameObject;
 
 		ps.transform.parent = null;

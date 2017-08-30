@@ -17,6 +17,7 @@ public class MangeManu : MonoBehaviour {
 
 	public GameObject mainMenuRoot;
 	public GameObject settingsRoot;
+	public GameObject achRoot;
 
 	private short callState = 0;
 	public float callWaitTime = 1.5f;
@@ -77,13 +78,21 @@ public class MangeManu : MonoBehaviour {
 
 	}
 
-	public void callUpgrades(){
+	public void callChellenges(){
 		//prepareCall ();
 		//callState = UPGRADES;
 	}
 
+	public void callAchievemnts(){
+		mainMenuRoot.SetActive(false);
+
+		settingsRoot.SetActive (false);
+		achRoot.SetActive (true);
+	}
+
 	public void callSettings(){
 		mainMenuRoot.SetActive(false);
+		achRoot.SetActive (false);
 		settingsRoot.SetActive (true);
 	}
 
@@ -97,6 +106,7 @@ public class MangeManu : MonoBehaviour {
 
 	public void startMainMenu(){
 		settingsRoot.SetActive (false);
+		achRoot.SetActive (false);
 		mainMenuRoot.SetActive (true);
 		updateHighscoreScreen();
 	}
