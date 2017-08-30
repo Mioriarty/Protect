@@ -34,6 +34,7 @@ public class MangeManu : MonoBehaviour {
 			buttonTextsColors.Add(o.transform.GetChild (0).gameObject.GetComponent<Text> ().color);
 		}
 		SoundControl.updateSound ();
+		startMainMenu ();
 	}
 	
 	// Update is called once per frame
@@ -79,15 +80,13 @@ public class MangeManu : MonoBehaviour {
 	}
 
 	public void callChellenges(){
-		//prepareCall ();
-		//callState = UPGRADES;
+		mainMenuRoot.SetActive(false);
+		settingsRoot.SetActive (false);
+		achRoot.SetActive (true);
 	}
 
 	public void callAchievemnts(){
-		mainMenuRoot.SetActive(false);
-
-		settingsRoot.SetActive (false);
-		achRoot.SetActive (true);
+		
 	}
 
 	public void callSettings(){

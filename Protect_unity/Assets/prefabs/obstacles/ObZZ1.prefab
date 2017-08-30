@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   psPrefab: {fileID: 1364829853137198, guid: b8555c00a7099430eaf668cecc2daf9b, type: 2}
-  particleColor: {r: 0.7058824, g: 0, b: 0.9058824, a: 1}
+  particleColor: {r: 0.1401384, g: 0.7058823, b: 0.21340017, a: 1}
   worthyness: 2
   trailPS: {fileID: 1442619620084614, guid: 7d02d2fc274784fd39c823e3e8b48b25, type: 2}
 --- !u!114 &114536754348155742
@@ -122,7 +122,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c44f47eb413d84f5ab891c8b6454f7e1, type: 3}
-  m_Color: {r: 0.7864216, g: 0.44766438, b: 0.88235295, a: 1}
+  m_Color: {r: 0.33812717, g: 0.7794118, b: 0.39595062, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

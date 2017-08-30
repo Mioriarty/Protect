@@ -8,7 +8,7 @@ public class ChellengesMenuOrga : MonoBehaviour {
 	public GameObject chButtonPrefab;
 	public GameObject chButtonsPanel;
 
-	private int chCount = 10;
+	private int chCount = 20;
 
 	// Use this for initialization
 	void Start () {

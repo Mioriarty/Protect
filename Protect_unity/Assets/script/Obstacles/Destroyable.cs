@@ -6,6 +6,8 @@ abstract public class Destroyable : MonoBehaviour {
 
 	public GameObject psPrefab;
 	public Color particleColor = new Color(1, 1, 1, 1);
+	private static Color richTrailPsColor = new Color (1f, 0.9f, 0.5f);
+	private static Color deadlyTrailPsColor = new Color (1f, 0.65f, 0.6f);
 	public int worthyness = 1;
 
 	private PlayerScript player;
@@ -20,10 +22,35 @@ abstract public class Destroyable : MonoBehaviour {
 
 	private bool clicked = false;
 
+	private bool deadlyParticlesRequested = false;
+
+	protected static bool destroyingAll = false;
+
+	public static int GROUND_HIT = -3;
+
+
 	void Start(){
 		player = GameObject.FindWithTag ("Orga").GetComponent<PlayerScript> ();
 		realTrailPS = Instantiate (trailPS);
+		if (worthyness > 1) {
+			ParticleSystem.MainModule main = realTrailPS.GetComponent<ParticleSystem>().main;
+			main.startColor = richTrailPsColor;
+		}
+
+		if (deadlyParticlesRequested)
+			enableRedParticles();
+
 		
+	}
+
+	public void enableRedParticles(){
+		if (realTrailPS == null) {
+			deadlyParticlesRequested = true;
+		} else {
+			ParticleSystem.MainModule main = realTrailPS.GetComponent<ParticleSystem>().main;
+			main.startColor = deadlyTrailPsColor;
+		}
+
 	}
 	
 	void OnEnable(){
@@ -52,7 +79,8 @@ abstract public class Destroyable : MonoBehaviour {
 		if(player != null && givePoints)
 			player.addPoints (worthyness);
 
-		realTrailPS.GetComponent<ParticleSystem> ().Stop ();
+		if(realTrailPS != null)
+			realTrailPS.GetComponent<ParticleSystem> ().Stop ();
 		
 		Destroy (gameObject);
 	}
@@ -70,11 +98,13 @@ abstract public class Destroyable : MonoBehaviour {
 
 
 	public static void destroyAll(){
+		destroyingAll = true;
 		for (int i = destrs.Count - 1; i >= 0; i--)
 			if(destrs[i].enabled)
 				destrs [i].destroy (false);
 		
 		destrs.Clear ();
+		destroyingAll = false;
 	}
 
 	public void click(){

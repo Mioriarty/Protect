@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class GroundScript : MonoBehaviour {
 
 
-	public int startHealth = 10;
-	private int health;
+	public float startHealth = 10;
+	private float health;
 
 	public Color fullHealthColor;
 	public Color noHealthColor;
@@ -63,12 +63,12 @@ public class GroundScript : MonoBehaviour {
 
 	}
 
-	public void hit(int strength, Color color){
+	public void hit(float strength, Color color){
 		animator.Play ("Wabble");
 
 		health -= strength;
 
-		healthbar.applyChange ((float)health / (float)startHealth);
+		healthbar.applyChange (health / startHealth);
 
 		if (health <= 0) {
 			if(rawColor == new Color(0f, 0f ,0f))
@@ -81,11 +81,11 @@ public class GroundScript : MonoBehaviour {
 		
 	}
 
-	public void heal(int amount){
+	public void heal(float amount){
 		health += amount;
 		health = Mathf.Min (health, startHealth);
 
-		healthbar.applyChange ((float)health / (float)startHealth);
+		healthbar.applyChange (health / startHealth);
 
 		doColorTrans (fullHealthColor);
 
@@ -94,14 +94,16 @@ public class GroundScript : MonoBehaviour {
 	void doColorTrans(Color color, float weight = 1){
 		if (rawColor == new Color (0f, 0f, 0f))
 			rawColor = color;
-		else if (color != fullHealthColor)
-			rawColor = Color.Lerp (rawColor, color, colorTransAmount * weight);
+		else if (color != fullHealthColor) {
+			float h, s, v;
+			Color.RGBToHSV (Color.Lerp (rawColor, color, colorTransAmount * weight), out h, out s, out v);
+			rawColor = Color.HSVToRGB (h, 0.7f, 0.9f);
+		}
 
-
-		float rh = (float)health / (float)startHealth;
+	//	float rh = health / startHealth;
 		colorTransTimePast = 0.0f;
 		transColors [0] = sp.color;
-		transColors [1] = Color.Lerp (fullHealthColor, rawColor, 1-rh);
+		transColors [1] = rawColor;
 	//	transColors [1] = Color.Lerp (noHealthColor, fullHealthColor, rh);
 		isColorTrans = true;
 	}

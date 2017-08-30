@@ -28,33 +28,59 @@ public class GeneratorScript : MonoBehaviour {
 	public List<GameObject> obstacles;
 	public List<GameObject> items;
 	private float[] times;
-	private int crntLevel;
+	private int crntLevel = 0;
+
+	/*
+		0: basic
+		1: fat and bloody
+		2: speedy
+		3: sin mover
+		4: zigzag fat
+		5: zigzag speedy
+		6: more speed
+		7: blow up
+
+	*/
+
 	private Level[] levels = new Level[]{
-		new Level(
+		new Level( // 0 Intro #0
 			0.0f,
 			new float[]{1.1f}),
-		new Level(
+		new Level( // 1 Intro #1
 			9.0f,
 			new float[]{1.53f, 2.1f}),
-		new Level(
+		new Level( // 2 Intro #3
 			22.0f,
-			new float[]{3f, 1.8f, 2f}),
-		new Level(
+			new float[]{3f, 1.8f, 2.03f}),
+		new Level( // 3 Showoff #3
 			33.0f,
 			new float[]{2f, 2.2f, 1.8f}),
-		new Level(
+		new Level( // 4 Intro #4
 			40.0f,
 			new float[]{1.2f, 2.5f, 3.49f, 3.3f}),
-		new Level(
+		new Level( // 5 Intro #5
 			55.0f,
-			new float[]{3.02f, 2.76f, -1f, 1.2f, 2.74f}),
-		new Level(
+			new float[]{3.02f, 2.76f, -1f, 1.77f, 2.03f}),
+		new Level( // 6 Intro #6
 			64.2f,
-			new float[]{1.556f, 3.87f, 3.01f, 3.5f, 4.89f, 7f})
+			new float[]{2.83f, 3.87f, 3.49f, 3.5f, 2.37f, 4.03f}),
+		new Level( // 7 Intro #8
+			82.0f,
+			new float[]{2.83f, 3.91f, -1f, -1f, 7.3f, -1f, -1f, 5.32f}),
+		new Level( // 8 Showoff #8
+			105.0f,
+			new float[]{4.76f, -1f, -1f, 5.32f, 6.03f, 3.42f, -1f, 5.32f}),
+		new Level( // 9 Intro #7
+			115.0f,
+			new float[]{-1f, 5.01f, -1f, -1f, -1f, -1f, 4.37f, 7.23f}),
+		new Level( // 10 abfuck
+			135.0f,
+			new float[]{6.78f, 7.45f, 4.38f, 5.67f, 6.53f, 6.35f, 9.71f, 5.12f})
 
 	};
 
 	private bool generating = true;
+
 
 	// Use this for initialization
 	void Start () {
@@ -65,7 +91,7 @@ public class GeneratorScript : MonoBehaviour {
 	}
 
 	void OnEnable(){
-		startTime = Time.time;
+		startTime = Time.time - (crntLevel == 0 ? 0f : levels[crntLevel-1].start);
 	}
 	
 	// Update is called once per frame
@@ -75,6 +101,13 @@ public class GeneratorScript : MonoBehaviour {
 				Debug.Log ("Level Up " + (crntLevel+1));
 				times = new float[obstacles.Count];
 				crntLevel++;
+				for (int i = 0; i < times.Length; i++) {
+					float delay = levels [crntLevel].delays [i];
+					if (delay <= 0f)
+						continue;
+					times [i] = Random.Range (-delay*0.5f, delay*0.9f);
+				}
+
 			}
 			Level level = levels [crntLevel];
 			for (int i = 0; i < times.Length; i++) {
@@ -115,8 +148,8 @@ public class GeneratorScript : MonoBehaviour {
 		float height = size.y * prefab.transform.localScale.y;
 		float width = size.x * prefab.transform.localScale.x;
 		float range = genRange - width - genSaveDistance;
-		float z = prefab.transform.localScale.x + prefab.transform.localScale.y;
-		Instantiate(prefab, new Vector3(Mathf.Lerp(0, range*2, (x+1)/2f)-range, genHeight + height + genSaveDistance, z), Quaternion.identity);
+
+		Instantiate(prefab, new Vector3(Mathf.Lerp(0, range*2, (x+1)/2f)-range, genHeight + height + genSaveDistance, 1f), Quaternion.identity);
 	}
 
 	public void stopGenerating(){

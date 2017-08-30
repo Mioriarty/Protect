@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ClickManager : MonoBehaviour {
 
-
 	void Update(){
 		foreach (Touch t in Input.touches) {
 			if (t.phase != TouchPhase.Began)
@@ -14,6 +13,7 @@ public class ClickManager : MonoBehaviour {
 
 		}
 	}
+
 
 	private void castClick(Vector2 pos){
 		RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint(pos), Vector2.zero);

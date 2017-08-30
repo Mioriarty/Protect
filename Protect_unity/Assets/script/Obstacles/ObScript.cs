@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObScript : MonoBehaviour {
 
 	public Vector3 movement;
-	public uint groundHitDamage = 1;
+	public float groundHitDamage = 1;
 	public Destroyable destroyable;
 
 	protected float xStart;
@@ -14,6 +14,10 @@ public class ObScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		xStart = transform.position.x;
+		float z = transform.localScale.x + transform.localScale.y;
+		transform.position = new Vector3 (xStart, transform.position.y, z);
+		if (groundHitDamage > 1)
+			destroyable.enableRedParticles ();
 		init ();
 	}
 
@@ -34,8 +38,8 @@ public class ObScript : MonoBehaviour {
 		if(!c.gameObject.activeSelf)
 			return;	
 		if (c.gameObject.tag == "Ground") {
-			GameObject.Find ("Ground").GetComponent<GroundScript> ().hit ((int)groundHitDamage, gameObject.GetComponent<SpriteRenderer> ().color);
-			destroyable.hit (-1);
+			GameObject.Find ("Ground").GetComponent<GroundScript> ().hit (groundHitDamage, gameObject.GetComponent<SpriteRenderer> ().color);
+			destroyable.hit (Destroyable.GROUND_HIT);
 		}
 	}
 
