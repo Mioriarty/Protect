@@ -6,7 +6,12 @@ public class ChildOb : ObScript {
 
 	public float horizontalGrip;
 
-	public float bounds = 3;
+	private float bounds;
+
+	override protected void init(){
+		bounds = Camera.main.orthographicSize * Screen.width / Screen.height;
+		bounds *= 0.8f;
+	}
 
 	override protected void move(){
 		movement.x *= 1 - (horizontalGrip * Time.deltaTime);

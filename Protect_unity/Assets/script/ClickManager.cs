@@ -4,14 +4,38 @@ using UnityEngine;
 
 public class ClickManager : MonoBehaviour {
 
+	public static ClickManager instance;
+	public void Awake(){
+		instance = this;
+	}
+
+	private float longestPress = 0.0f;
+	private float[] pressStarts = new float[40];
+
 	void Update(){
-		foreach (Touch t in Input.touches) {
-			if (t.phase != TouchPhase.Began)
-				continue;
-			castClick (t.position);
+		if (SystemInfo.deviceType == DeviceType.Desktop) {
+			if (Input.GetMouseButton (0)) {
+				longestPress += Time.deltaTime;
+				if(Input.GetMouseButtonDown(0))
+					castClick (Input.mousePosition);
+			} else
+				longestPress = 0.0f;
+		} else {
+			longestPress = 0.0f;
+			foreach (Touch t in Input.touches) {
+				if (t.phase == TouchPhase.Began) {
+					pressStarts [t.fingerId] = Time.time;
+				} else {
+					longestPress = Mathf.Max (longestPress, Time.time - pressStarts [t.fingerId]);
+				}
 
-
+				if (t.phase != TouchPhase.Began)
+					continue;
+				castClick (t.position);
+			}
 		}
+
+		Debug.Log (longestPress);
 	}
 
 
@@ -24,6 +48,10 @@ public class ClickManager : MonoBehaviour {
 			}
 
 		}
+	}
+
+	public float getLongestPress(){
+		return longestPress;
 	}
 
 

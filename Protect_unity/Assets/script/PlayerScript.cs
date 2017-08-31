@@ -13,6 +13,9 @@ public class PlayerScript : MonoBehaviour {
 	private bool isSceneTrans = false;
 	private float sceneTransTimePast = 0.0f;
 
+	public float superSpeed = 2f;
+	public float touchDurationForSuperSpeed = 1.5f;
+
 	void Start(){
 		SoundControl.updateSound ();
 	}
@@ -27,6 +30,12 @@ public class PlayerScript : MonoBehaviour {
 				gameObject.SetActive (false);
 			}
 		}
+
+
+		if (ClickManager.instance.getLongestPress () >= touchDurationForSuperSpeed)
+			Time.timeScale = superSpeed;
+		else
+			Time.timeScale = 1f;
 	}
 
 	public void addPoints(int amount){

@@ -503,6 +503,7 @@ GameObject:
   - component: {fileID: 984700530}
   - component: {fileID: 984700532}
   - component: {fileID: 984700533}
+  - component: {fileID: 984700534}
   m_Layer: 0
   m_Name: Organisator
   m_TagString: Orga
@@ -562,6 +563,8 @@ MonoBehaviour:
   scoreboard: {fileID: 2064016779}
   gen: {fileID: 984700530}
   sceneTransTime: 2
+  superSpeed: 4
+  touchDurationForSuperSpeed: 0.5
 --- !u!114 &984700533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,6 +576,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd16063b61564dab8a94723b0557a96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &984700534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 984700529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4592f63aa0b4a229f6d17f783e1bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  superSpeed: 4
+  touchDurationForSuperSpeed: 0.6
 --- !u!1 &1060053863
 GameObject:
   m_ObjectHideFlags: 0

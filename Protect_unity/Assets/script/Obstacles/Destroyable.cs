@@ -88,13 +88,6 @@ abstract public class Destroyable : MonoBehaviour {
 	void setPsPos(){
 		realTrailPS.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1f);
 	}
-		
-
-	void OnMouseDown(){
-		if (SystemInfo.deviceType == DeviceType.Desktop)
-			click ();
-
-	}
 
 
 	public static void destroyAll(){
