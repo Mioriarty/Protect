@@ -28,9 +28,14 @@ abstract public class Destroyable : MonoBehaviour {
 
 	public static int GROUND_HIT = -3;
 
+	private Animator animator;
+
+	private bool isDead = false;
+
 
 	void Start(){
 		player = GameObject.FindWithTag ("Orga").GetComponent<PlayerScript> ();
+		animator = transform.GetChild (0).gameObject.GetComponent<Animator> ();
 		realTrailPS = Instantiate (trailPS);
 		if (worthyness > 1) {
 			ParticleSystem.MainModule main = realTrailPS.GetComponent<ParticleSystem>().main;
@@ -62,6 +67,9 @@ abstract public class Destroyable : MonoBehaviour {
 	}
 
 	void Update(){
+		if (isDead)
+			return;
+
 		setPsPos ();
 		clicked = false;
 		if (transform.position.y < -Camera.main.orthographicSize - 2.0f) {
@@ -82,11 +90,17 @@ abstract public class Destroyable : MonoBehaviour {
 		if(realTrailPS != null)
 			realTrailPS.GetComponent<ParticleSystem> ().Stop ();
 		
-		Destroy (gameObject);
+		animator.Play ("ObDie");
+		GetComponent<CircleCollider2D> ().enabled = false;
+		isDead = true;
 	}
 
 	void setPsPos(){
 		realTrailPS.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1f);
+	}
+
+	public void groundHit(){
+		destroy (false);
 	}
 
 
@@ -103,8 +117,13 @@ abstract public class Destroyable : MonoBehaviour {
 	public void click(){
 		if (!clicked) {
 			clicked = true;
+			animator.Play("ObHit");
 			hit (1);
 		}
+	}
+
+	public bool isNowDead(){
+		return isDead;
 	}
 
 }

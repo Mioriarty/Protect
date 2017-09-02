@@ -39,6 +39,7 @@ public class GeneratorScript : MonoBehaviour {
 		5: zigzag speedy
 		6: more speed
 		7: blow up
+		8: more lifes
 
 	*/
 
@@ -49,33 +50,33 @@ public class GeneratorScript : MonoBehaviour {
 		new Level( // 1 Intro #1
 			9.0f,
 			new float[]{1.53f, 2.1f}),
-		new Level( // 2 Intro #3
+		new Level( // 2 Intro #2
 			22.0f,
 			new float[]{3f, 1.8f, 2.03f}),
-		new Level( // 3 Showoff #3
+		new Level( // 3 Showoff #2
 			33.0f,
 			new float[]{2f, 2.2f, 1.8f}),
-		new Level( // 4 Intro #4
+		new Level( // 4 Intro #3
 			40.0f,
 			new float[]{1.2f, 2.5f, 3.49f, 3.3f}),
-		new Level( // 5 Intro #5
+		new Level( // 5 Intro #4
 			55.0f,
 			new float[]{3.02f, 2.76f, -1f, 1.77f, 2.03f}),
-		new Level( // 6 Intro #6
+		new Level( // 6 Intro #5
 			64.2f,
-			new float[]{2.83f, 3.87f, 3.49f, 3.5f, 2.37f, 4.03f}),
-		new Level( // 7 Intro #8
+			new float[]{2.83f, 3.87f, 3.49f, 3.5f, 3.37f, 4.03f}),
+		new Level( // 7 Intro #7, #8
 			82.0f,
-			new float[]{2.83f, 3.91f, -1f, -1f, 7.3f, -1f, -1f, 5.32f}),
-		new Level( // 8 Showoff #8
+			new float[]{2.83f, 3.91f, -1f, -1f, 7.3f, -1f, -1f, 5.32f, 7.66f}),
+		new Level( // 8 Showoff #7
 			105.0f,
 			new float[]{4.76f, -1f, -1f, 5.32f, 6.03f, 3.42f, -1f, 5.32f}),
-		new Level( // 9 Intro #7
+		new Level( // 9 Intro #6
 			115.0f,
-			new float[]{-1f, 5.01f, -1f, -1f, -1f, -1f, 4.37f, 7.23f}),
+			new float[]{-1f, 5.01f, -1f, -1f, -1f, -1f, 4.37f, 7.23f, 4.02f, 8f}),
 		new Level( // 10 abfuck
 			135.0f,
-			new float[]{6.78f, 7.45f, 4.38f, 5.67f, 6.53f, 6.35f, 9.71f, 5.12f})
+			new float[]{6.78f, 7.45f, 4.38f, 5.67f, 6.53f, 6.35f, 9.71f, 5.12f, 8.3f})
 
 	};
 
@@ -101,7 +102,7 @@ public class GeneratorScript : MonoBehaviour {
 				Debug.Log ("Level Up " + (crntLevel+1));
 				times = new float[obstacles.Count];
 				crntLevel++;
-				for (int i = 0; i < times.Length; i++) {
+				for (int i = 0; i < levels[crntLevel].delays.Length; i++) {
 					float delay = levels [crntLevel].delays [i];
 					if (delay <= 0f)
 						continue;

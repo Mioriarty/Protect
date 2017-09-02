@@ -25,6 +25,8 @@ public class ObScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (destroyable.isNowDead ())
+			return;
 		move ();
 	}
 
@@ -38,8 +40,8 @@ public class ObScript : MonoBehaviour {
 		if(!c.gameObject.activeSelf)
 			return;	
 		if (c.gameObject.tag == "Ground") {
-			GameObject.Find ("Ground").GetComponent<GroundScript> ().hit (groundHitDamage, gameObject.GetComponent<SpriteRenderer> ().color);
-			destroyable.hit (Destroyable.GROUND_HIT);
+			GameObject.Find ("Ground").GetComponent<GroundScript> ().hit (groundHitDamage, transform.GetChild(0).gameObject.GetComponent<SpriteRenderer> ().color);
+			destroyable.groundHit ();
 		}
 	}
 

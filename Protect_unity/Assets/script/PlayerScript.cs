@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public enum GameState {
+	NONE,
+	NORMAL,
+	SUPER_SPEED,
+	DYING
+}
+
 public class PlayerScript : MonoBehaviour {
 
 	private int points = 0;
@@ -16,8 +23,13 @@ public class PlayerScript : MonoBehaviour {
 	public float superSpeed = 2f;
 	public float touchDurationForSuperSpeed = 1.5f;
 
+	private GameState gameState = GameState.NONE;
+
+
+
 	void Start(){
 		SoundControl.updateSound ();
+		gameState = GameState.NORMAL;
 	}
 
 
@@ -32,10 +44,13 @@ public class PlayerScript : MonoBehaviour {
 		}
 
 
-		if (ClickManager.instance.getLongestPress () >= touchDurationForSuperSpeed)
+		if (ClickManager.instance.getLongestPress () >= touchDurationForSuperSpeed) {
 			Time.timeScale = superSpeed;
-		else
+			gameState = GameState.SUPER_SPEED;
+		} else {
 			Time.timeScale = 1f;
+			gameState = GameState.NORMAL;
+		}
 	}
 
 	public void addPoints(int amount){

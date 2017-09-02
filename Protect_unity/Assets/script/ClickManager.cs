@@ -35,7 +35,6 @@ public class ClickManager : MonoBehaviour {
 			}
 		}
 
-		Debug.Log (longestPress);
 	}
 
 

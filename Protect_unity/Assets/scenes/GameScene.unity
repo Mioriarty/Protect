@@ -526,14 +526,15 @@ MonoBehaviour:
   itemReloadTime: 1
   itemChance: 0.01
   obstacles:
-  - {fileID: 1713516962402266, guid: a48e6b0871b204bc7b8fc3d41ef97c64, type: 2}
-  - {fileID: 1021073020523834, guid: 77a5940296db24a8eb656ea49843ac3b, type: 2}
-  - {fileID: 1021073020523834, guid: 424bde0fa564d46dab1f21a4c6002e10, type: 2}
-  - {fileID: 1713516962402266, guid: 451b401a640fe4ea5b7df063fb9ca21a, type: 2}
-  - {fileID: 1349108483532142, guid: 00b5582ce9a46482d87fbc2e30af535c, type: 2}
-  - {fileID: 1425766097196388, guid: 66e9895f166b74a6e9b6e5bae3a4c7b5, type: 2}
-  - {fileID: 1880184920038950, guid: c62c0b8e5c1a14359ad79c073cb3904d, type: 2}
-  - {fileID: 1013092648583488, guid: 0bc2806374a254bdb93a9ee6553a2e21, type: 2}
+  - {fileID: 1494405754636670, guid: 937396f2ff0974abdbae05aadee8fc59, type: 2}
+  - {fileID: 1337998600424732, guid: 77a5940296db24a8eb656ea49843ac3b, type: 2}
+  - {fileID: 1395545096092572, guid: 424bde0fa564d46dab1f21a4c6002e10, type: 2}
+  - {fileID: 1598307021698672, guid: 451b401a640fe4ea5b7df063fb9ca21a, type: 2}
+  - {fileID: 1079729963062104, guid: 00b5582ce9a46482d87fbc2e30af535c, type: 2}
+  - {fileID: 1767319825243578, guid: 66e9895f166b74a6e9b6e5bae3a4c7b5, type: 2}
+  - {fileID: 1719402469141878, guid: c62c0b8e5c1a14359ad79c073cb3904d, type: 2}
+  - {fileID: 1064380311073610, guid: 0bc2806374a254bdb93a9ee6553a2e21, type: 2}
+  - {fileID: 1889883519388244, guid: ce1e0dd6552f64f48a62331b5a1c2eb2, type: 2}
   items:
   - {fileID: 1621845048314704, guid: ff0bd200420d946b69621297a407796d, type: 2}
 --- !u!4 &984700531
@@ -563,7 +564,7 @@ MonoBehaviour:
   scoreboard: {fileID: 2064016779}
   gen: {fileID: 984700530}
   sceneTransTime: 2
-  superSpeed: 4
+  superSpeed: 2
   touchDurationForSuperSpeed: 0.5
 --- !u!114 &984700533
 MonoBehaviour:
@@ -800,7 +801,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1552179249}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 16.33}
   m_LocalScale: {x: 0.7325711, y: 0.49387848, z: 0.6511987}
   m_Children: []
   m_Father: {fileID: 1060053865}

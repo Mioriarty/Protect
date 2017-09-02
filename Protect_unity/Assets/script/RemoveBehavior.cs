@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class RemoveBehavior : StateMachineBehaviour {
 
+	public bool removeParent = false;
+
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		Debug.Log ("End");
-		Destroy (animator.gameObject);
+		if (removeParent)
+			Destroy (animator.gameObject.transform.parent.gameObject);
+		else
+			Destroy (animator.gameObject);
 	}
 		
 }
