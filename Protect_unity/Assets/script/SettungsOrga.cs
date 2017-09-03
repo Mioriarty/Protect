@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SettungsOrga : MonoBehaviour {
 
 	public GameObject soundOnButton;
 	public GameObject soundOffButton;
 
+	public Text debugText;
+	public FPSShower fpsShower;
+
 	// Use this for initialization
 	void Start () {
 		bool soundOn = PlayerPrefs.GetInt ("soundOn", 1) == 1;
 		soundOffButton.GetComponent<CanvasRenderer> ().SetAlpha (soundOn ? 0.3f : 1.0f);
 		soundOnButton.GetComponent<CanvasRenderer> ().SetAlpha (soundOn ? 1.0f : 0.3f);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+		callDebug (false);
 	}
 
 	void OnEnable(){
@@ -48,6 +49,19 @@ public class SettungsOrga : MonoBehaviour {
 		
 		PlayerPrefs.DeleteAll ();
 		callSound (true);
+		callDebug (false);
+	}
+
+	public void callDebug(bool change){
+		if (PlayerPrefs.GetInt ("debugMode", 0) == 0 ^ !change) {
+			debugText.text = "Debug: On";
+			PlayerPrefs.SetInt ("debugMode", 1);
+		} else {
+			debugText.text = "Debug: Off";
+			PlayerPrefs.SetInt ("debugMode", 0);
+		}
+		if (change)
+			fpsShower.updateVisibility ();
 	}
 
 }

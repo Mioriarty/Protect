@@ -9,29 +9,33 @@ public class ClickManager : MonoBehaviour {
 		instance = this;
 	}
 
+
 	private float longestPress = 0.0f;
 	private float[] pressStarts = new float[40];
 
-	void Update(){
-		if (SystemInfo.deviceType == DeviceType.Desktop) {
-			if (Input.GetMouseButton (0)) {
-				longestPress += Time.deltaTime;
-				if(Input.GetMouseButtonDown(0))
-					castClick (Input.mousePosition);
-			} else
-				longestPress = 0.0f;
-		} else {
-			longestPress = 0.0f;
-			foreach (Touch t in Input.touches) {
-				if (t.phase == TouchPhase.Began) {
-					pressStarts [t.fingerId] = Time.time;
-				} else {
-					longestPress = Mathf.Max (longestPress, Time.time - pressStarts [t.fingerId]);
-				}
 
-				if (t.phase != TouchPhase.Began)
-					continue;
-				castClick (t.position);
+	void Update(){
+		if(PlayerScript.instance == null || PlayerScript.instance.isGameRunning() || PlayerScript.instance.getGameState() == GameState.STARTING){
+			if (SystemInfo.deviceType == DeviceType.Desktop) {
+				if (Input.GetMouseButton (0)) {
+					longestPress += Time.deltaTime;
+					if(Input.GetMouseButtonDown(0))
+						castClick (Input.mousePosition);
+				} else
+					longestPress = 0.0f;
+			} else {
+				longestPress = 0.0f;
+				foreach (Touch t in Input.touches) {
+					if (t.phase == TouchPhase.Began) {
+						pressStarts [t.fingerId] = Time.time;
+					} else {
+						longestPress = Mathf.Max (longestPress, Time.time - pressStarts [t.fingerId]);
+					}
+
+					if (t.phase != TouchPhase.Began)
+						continue;
+					castClick (t.position);
+				}
 			}
 		}
 

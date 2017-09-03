@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 public enum GameState {
 	NONE,
 	NORMAL,
+	STARTING,
 	SUPER_SPEED,
+	PAUSE,
 	DYING
 }
 
@@ -24,6 +26,13 @@ public class PlayerScript : MonoBehaviour {
 	public float touchDurationForSuperSpeed = 1.5f;
 
 	private GameState gameState = GameState.NONE;
+
+
+	public static PlayerScript instance;
+
+	void Awake(){
+		instance = this;
+	}
 
 
 
@@ -43,13 +52,13 @@ public class PlayerScript : MonoBehaviour {
 			}
 		}
 
+		if (isGameRunning ()) {
 
-		if (ClickManager.instance.getLongestPress () >= touchDurationForSuperSpeed) {
-			Time.timeScale = superSpeed;
-			gameState = GameState.SUPER_SPEED;
-		} else {
-			Time.timeScale = 1f;
-			gameState = GameState.NORMAL;
+			if (ClickManager.instance.getLongestPress () >= touchDurationForSuperSpeed) {
+				updateGameState (GameState.SUPER_SPEED);
+			} else {
+				updateGameState (GameState.NORMAL);
+			}
 		}
 	}
 
@@ -64,5 +73,45 @@ public class PlayerScript : MonoBehaviour {
 		gen.stopGenerating ();
 		PlayerPrefs.SetInt ("points", points);
 		isSceneTrans = true;
+		updateGameState(GameState.DYING);
 	}
+
+	public bool updateGameState(GameState state){
+		if (gameState == state)
+			return false;
+
+		switch (state) {
+		case GameState.DYING:
+			Time.timeScale = 1f;
+			break;
+		case GameState.PAUSE:
+			Time.timeScale = 0.00000001f;
+			break;
+		case GameState.NORMAL:
+			Time.timeScale = 1f;
+			break;
+		case GameState.SUPER_SPEED:
+			Time.timeScale = superSpeed;
+			break;
+		}
+
+		gameState = state;
+
+		return true;
+	}
+
+
+	public GameState getGameState(){
+		return gameState;
+	}
+
+	void OnDestroy(){
+		instance = null;
+	}
+
+	public bool isGameRunning(){
+		return gameState == GameState.NORMAL || gameState == GameState.SUPER_SPEED;
+	}
+
+
 }

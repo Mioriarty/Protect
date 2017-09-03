@@ -134,7 +134,7 @@ MonoBehaviour:
   movement: {x: 3.5, y: -2.5, z: 0}
   groundHitDamage: 1
   destroyable: {fileID: 114676400035901614}
-  changeChance: 0.02
+  changeChance: 0.3
   bounds: 3
 --- !u!212 &212379850694327388
 SpriteRenderer:

@@ -73,7 +73,7 @@ public class GeneratorScript : MonoBehaviour {
 			new float[]{4.76f, -1f, -1f, 5.32f, 6.03f, 3.42f, -1f, 5.32f}),
 		new Level( // 9 Intro #6
 			115.0f,
-			new float[]{-1f, 5.01f, -1f, -1f, -1f, -1f, 4.37f, 7.23f, 4.02f, 8f}),
+			new float[]{-1f, 5.01f, -1f, -1f, -1f, -1f, 4.37f, 7.23f, 4.02f}),
 		new Level( // 10 abfuck
 			135.0f,
 			new float[]{6.78f, 7.45f, 4.38f, 5.67f, 6.53f, 6.35f, 9.71f, 5.12f, 8.3f})
